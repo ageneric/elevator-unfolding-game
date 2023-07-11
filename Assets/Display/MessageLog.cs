@@ -13,18 +13,18 @@ public class MessageLog : MonoBehaviour
 
 
     public void AddMessage(string message) {
-        Debug.Log(message);
-
-        // Count the number of consecutive repeated messages.
+        // Debug.Log(message);
+        // Count the number of consecutive repeated messages, editing the previous repeat.
         if (lastMessage == message) {
             timesRepeatedMessage++;
-
-            if (timesRepeatedMessage <= 2) {
-                message += " x" + timesRepeatedMessage.ToString();
-            }
+            message += " x" + (timesRepeatedMessage + 1).ToString();
+            currentMessages[currentMessages.Count - 1] = message;
         }
-
-        currentMessages.Add(message);
+        else {
+            currentMessages.Add(message);
+            timesRepeatedMessage = 0;
+            lastMessage = message;
+        }
 
         if (currentMessages.Count > dialogueText.Length) {
             currentMessages.RemoveAt(0);

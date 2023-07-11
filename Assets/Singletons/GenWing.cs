@@ -1,38 +1,46 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GenWing : MonoBehaviour
 {
-    public static GenWing Instance { get; private set; }
+    public static GenWing Player { get; private set; }
 
     public string keyName = "Wing";
     public int owned = 0;
 
     public void Awake() {
-        if (Instance is null) {
-            Instance = this;
+        if (Player is null) {
+            Player = this;
         }
     }
 
     public float Cost() {
-        return Mathf.Max(0, 2 * (10 - owned + Mathf.Pow(owned, 3)));
+        if (owned < 10) {
+            return 2 * (Mathf.Max(0, 10 - owned) + Mathf.Pow(owned, 3));
+        }
+        else {
+            return 2 * Mathf.Pow(owned, 3);
+        }
     }
 
     public bool CanPurchase() {
         if (Game.Player.ascend && Game.Player.height >= Cost()) {
-            if (GenCable.Instance.owned >= 2 || (GenRocket.Instance.owned >= 1 && GenCable.Instance.owned >= 1)) {
+            if (GenCable.Player.owned >= 2 
+                    || (GenRocket.Player.owned >= 1 && GenCable.Player.owned >= 1)
+                    || (Upgrade.upgradeWingCost && owned < 10)) {
                 return true;
             }
         }
-
         return false;
     }
 
     public void Purchase() {
         if (CanPurchase()) {
-            Game.Player.height -= Cost();
-            GenCable.Instance.owned -= 1;
+            float cost = Cost();
+            Game.Player.height -= cost;
+            Game.Player.lostRunHeight += cost;
+            if (!(Upgrade.upgradeWingCost && owned < 10)) {
+                GenCable.Player.owned = Mathf.Max(0, GenCable.Player.owned - 1);
+            }
             owned++;
         }
     }
