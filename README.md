@@ -13,9 +13,9 @@ Made using Unity with WebGL for the web build.
 
 ## Licensing
 This game uses the fonts Fira Mono and Poppins which are licensed under the
-Open Font License. Excluding Unity framework code, the remainder of the project
+Open Font License. The remainder of the project (excluding Unity framework code)
 is an original work.
 
 > [CC0](https://creativecommons.org/publicdomain/zero/1.0/): To the extent possible under law, Kevin Gao has waived all copyright and related or neighboring rights to the C# code of Elevator Goes Up?. This work is published from: United Kingdom.
 
-> [CC BY-NC](https://creativecommons.org/licenses/by-nc/4.0/): Where not covered above - this work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.
+> [CC BY-NC](https://creativecommons.org/licenses/by-nc/4.0/): Where not covered above, this work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.
